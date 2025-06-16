@@ -1,5 +1,8 @@
 # Build stage
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM mcr.microsoft.com/openjdk/jdk:17-ubuntu AS build
+
+# Install Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -16,7 +19,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Production stage
-FROM openjdk:17-slim
+FROM mcr.microsoft.com/openjdk/jdk:17-ubuntu
 
 WORKDIR /app
 
