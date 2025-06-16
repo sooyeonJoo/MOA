@@ -1,0 +1,101 @@
+/* stats.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.main-header {
+  background-color: #bba6d9;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.sub-header {
+  background-color: #e8e3f3;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.sub-header button {
+  padding: 6px 12px;
+  background-color: #c1a3e8;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 150px);
+}
+
+.side-nav {
+  background-color: #f0ebf9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 120px;
+  border-right: 1px solid #ddd;
+}
+
+.side-nav button {
+  background-color: #c1a3e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.side-nav button:disabled {
+  background-color: #bbb;
+  color: #eee;
+  cursor: default;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+}
+
+.chart-section {
+  flex: 2;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-right: 20px;
+}
+
+/* 캔버스 중앙 정렬 및 크기 제한 */
+.chart-section canvas {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.main-footer {
+  background-color: #bba6d9;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}

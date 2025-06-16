@@ -1,0 +1,396 @@
+/* record.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.main-header {
+  background-color: #bba6d9;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.sub-header {
+  background-color: #e8e3f3;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.sub-header input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.sub-header button {
+  padding: 6px 12px;
+  background-color: #c1a3e8;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.container {
+  display: flex;
+  height: calc(100vh - 150px);
+}
+
+.side-nav {
+  background-color: #f0ebf9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 120px;
+  border-right: 1px solid #ddd;
+}
+
+.side-nav button {
+  background-color: #c1a3e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.side-nav button:disabled {
+  background-color: #bbb !important;
+  color: #eee !important;
+  cursor: default;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+}
+
+.calendar-section {
+  flex: 2;
+  margin-right: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.input-section {
+  flex: 1;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.input-section h3 {
+  margin-top: 0;
+}
+
+.input-section input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 8px;
+  background-color: #ddd;
+  color: #333;
+  border: 1px solid #999;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-btn.active {
+  background-color: #c1a3e8 !important;
+  color: white !important;
+  border: 1px solid #a084bf !important;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.category-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.category-btn span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.category-btn:hover, .category-btn.active {
+  background: #d1c4e9;
+  color: #222;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(103,58,183,0.08);
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.save-btn {
+  width: 100%;
+  background-color: #c1a3e8;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main-footer {
+  background-color: #bba6d9;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 모달 배경 */
+#detail-modal {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* 모달 내용 */
+#detail-modal > div {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+#detail-modal .close-btn {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+#modal-record-list > div {
+  margin-bottom: 16px;
+}
+
+#modal-record-list b {
+  font-size: 1.1em;
+}
+
+#modal-record-list .record-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+#modal-record-list .record-row .amount-income {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#modal-record-list .record-row .amount-expense {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#modal-record-list .record-row .category {
+  color: #888;
+}
+#modal-record-list .record-row button {
+  margin-left: auto;
+  background: #b39ddb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+#modal-record-list .record-row button + button {
+  margin-left: 6px;
+  background: #f48fb1;
+}
+#modal-record-list .memo {
+  margin-left: 36px;
+  color: #888;
+  font-size: 0.95em;
+}
+
+/* 공통 버튼 스타일 */
+.moa-btn {
+  background: #b39ddb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1.08em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(103,58,183,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  outline: none;
+  margin: 4px 0;
+  letter-spacing: 0.02em;
+}
+.moa-btn:hover, .moa-btn:focus {
+  background: #9575cd;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(103,58,183,0.13);
+}
+.moa-btn:active {
+  background: #7e57c2;
+  color: #fff;
+}
+
+/* 기존 버튼 스타일과 조화롭게 */
+.toggle-btn.moa-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  box-shadow: none;
+  font-weight: 500;
+}
+.toggle-btn.moa-btn.active, .toggle-btn.moa-btn:hover {
+  background: #d1c4e9;
+  color: #222;
+}
+
+.save-btn.moa-btn {
+  width: 100%;
+  margin-top: 18px;
+  font-size: 1.15em;
+  font-weight: bold;
+  background: #c9a4e7;
+}
+.save-btn.moa-btn:hover {
+  background: #b39ddb;
+}
+
+#saveBudgetBtn.moa-btn {
+  padding: 4px 12px;
+  font-size: 1em;
+  background: #b39ddb;
+}
+#saveBudgetBtn.moa-btn:hover {
+  background: #9575cd;
+}
+
+#logoutBtn.moa-btn {
+  background: #f48fb1;
+  color: #fff;
+  padding: 8px 18px;
+  font-size: 1em;
+  margin-left: 10px;
+}
+#logoutBtn.moa-btn:hover {
+  background: #d32f2f;
+}
+
+/* FullCalendar 심플 스타일 */
+.fc-toolbar-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #6a4fb3;
+  letter-spacing: 0.01em;
+}
+.fc-button {
+  background: #ede7f6 !important;
+  color: #6a4fb3 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  margin: 0 2px !important;
+  font-size: 1em;
+  font-weight: 500;
+  box-shadow: none !important;
+  transition: background 0.2s;
+}
+.fc-button:hover, .fc-button:focus {
+  background: #d1c4e9 !important;
+  color: #4a2e8c !important;
+}
+.fc-button-active {
+  background: #b39ddb !important;
+  color: #fff !important;
+}
+
+.fc-day-today {
+  background: #f3e5f5 !important;
+  border-radius: 6px;
+}
+
+.fc-daygrid-day:hover {
+  background: #f8f6fc !important;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.fc-event {
+  border-radius: 6px !important;
+  font-weight: 500;
+  font-size: 0.98em;
+  padding: 1px 4px;
+  border: none !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인 – 모아써</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <div class="card">
+    <div class="close-btn" onclick="window.close()">×</div>
+    <div class="logo"></div>
+
+    <!-- 로그인 폼 -->
+    <form id="loginForm">
+      <!-- name을 userId로 바꿔야 백엔드 DTO와 일치합니다 -->
+      <input name="userId" type="text" placeholder="아이디" required />
+      <input name="password" type="password" placeholder="비밀번호" required />
+      <button type="submit" class="btn-primary">로그인</button>
+    </form>
+
+    <a href="signup.html" class="link-signup">회원가입</a>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+
+      // 요청 페이로드: user-service의 LoginRequestDTO(userId, password)와 일치
+      const data = {
+        userId: form.userId.value.trim(),
+        password: form.password.value
+      };
+
+      try {
+        const res = await fetch('http://localhost:8081/user/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(`로그인 실패: ${errorText || res.status}`);
+        }
+
+        // 성공 시 응답 JSON 예: { accessToken: "jwt-token-string", userId: "user123" }
+        const json = await res.json();
+        localStorage.setItem('accessToken', json.accessToken);
+        localStorage.setItem('userId', json.userId);
+
+        alert('로그인 성공!');
+        // 이후 원하는 페이지로 리다이렉트
+        window.location.href = '/record.html';
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  </script>
+</body>
+</html>

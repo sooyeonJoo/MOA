@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>모아써 프로젝트 - 통계</title>
+  <link rel="stylesheet" href="stats.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="stats.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <h1>모으고, 아껴쓰고, 똑똑하게 써라 : 모아써 프로젝트</h1>
+  </header>
+
+  <div class="sub-header">
+    <span>수입 : <span id="income">2,500,000</span>원</span>
+    <span>지출 : <span id="expense">1,500,000</span>원</span>
+    <span>현재 잔고 : <span id="balance">1,000,000</span>원</span>
+    <div class="budget-header">
+      <span id="budgetLabel">6월 예산 : <span id="budgetAmount">0원</span></span>
+      <button id="openBudgetModalBtn" class="moa-btn" style="margin-left:6px; padding:4px 8px;">입력</button>
+    </div>
+    <button id="logoutBtn" class="moa-btn">로그아웃</button>
+  </div>
+
+  <div class="container">
+    <nav class="side-nav">
+      <button onclick="location.href='record.html'">대시보드</button>
+      <button disabled>통계</button>
+    </nav>
+
+    <main class="content">
+      <section class="chart-section">
+        <canvas id="categoryPieChart" width="400" height="400"></canvas>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 모아써 프로젝트</p>
+  </footer>
+</body>
+</html>

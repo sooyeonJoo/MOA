@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>모아써 프로젝트 - 기록</title>
+  <link rel="stylesheet" href="record.css" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="record.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <h1>모으고, 아껴쓰고, 똑똑하게 써라 : 모아써 프로젝트</h1>
+  </header>
+
+  <div class="sub-header">
+    <span>수입 : <span id="income">2,500,000</span>원</span>
+    <span>지출 : <span id="expense">1,500,000</span>원</span>
+    <span>현재 잔고 : <span id="balance">1,000,000</span>원</span>
+    <div class="budget-header">
+      <span id="budgetLabel">6월 예산 : <span id="budgetAmount">0원</span></span>
+      <button id="openBudgetModalBtn" class="moa-btn" style="margin-left:6px; padding:4px 8px;">입력</button>
+    </div>
+    <button id="logoutBtn" class="moa-btn">로그아웃</button>
+  </div>
+
+  <div class="container">
+    <nav class="side-nav">
+      <button id="dashboardBtn" disabled>대시보드</button>
+      <button id="statsBtn">통계</button>
+    </nav>
+
+    <main class="content">
+      <section class="calendar-section">
+        <div id="calendar"></div>
+      </section>
+
+      <aside class="input-section">
+        <h3>지출/수입 입력</h3>
+        <input type="text" placeholder="금액을 입력하세요" />
+        <div class="toggle-buttons">
+          <button class="toggle-btn moa-btn" data-type="지출">지출</button>
+          <button class="toggle-btn moa-btn" data-type="수입">수입</button>
+        </div>
+
+        <div class="details">
+          <input type="date" id="date-input" style="width:100%;margin-bottom:10px;" readonly>
+          <p id="selected-date" style="display:none;">2021.07.15</p>
+          <div class="category-section">
+            <button class="category-btn"><span>💸 생활비</span></button>
+            <button class="category-btn"><span>🚌 교통비</span></button>
+            <button class="category-btn"><span>🍚 식비</span></button>
+            <button class="category-btn"><span>💊 의료비</span></button>
+            <button class="category-btn"><span>🛍️ 쇼핑</span></button>
+            <button class="category-btn"><span>✈️ 여행</span></button>
+            <button class="category-btn"><span>⚰️ 경조사</span></button>
+            <button class="category-btn"><span>🔧 기타</span></button>
+            <button class="category-btn"><span>💑 데이트</span></button>
+            <button class="category-btn"><span>💰 수입</span></button>
+            <button class="category-btn"><span>🛠️ 고정비</span></button>
+          </div>
+          <textarea placeholder="메모를 입력하세요"></textarea>
+          <button class="save-btn moa-btn">저장</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 모아써 프로젝트</p>
+  </footer>
+
+
+</body>
+</html>
