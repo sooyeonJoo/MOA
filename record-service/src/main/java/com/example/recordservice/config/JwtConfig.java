@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @details JWT 관련 설정값을 관리합니다.
  */
 @Configuration
-@ConfigurationProperties(prefix = "app")
+@ConfigurationProperties(prefix = "jwt")
 public class JwtConfig {
     private String jwtSecret;
     private long jwtExpirationInMs;

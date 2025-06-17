@@ -1,8 +1,19 @@
 // stats.js
 
+// API 설정 가져오기
+let apiConfig = null;
+async function getApiConfig() {
+  if (!apiConfig) {
+    const res = await fetch('/api/config');
+    apiConfig = await res.json();
+  }
+  return apiConfig;
+}
+
 async function fetchBudget(userId, yyyy, mm, token) {
   try {
-    const res = await fetch(`http://localhost:8082/budget`, {
+    const config = await getApiConfig();
+    const res = await fetch(`${config.recordServiceUrl}/budget`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('예산 조회 실패');
@@ -83,7 +94,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       const v = content.querySelector('#modalBudgetInput').value.trim();
       if (!v || isNaN(Number(v))) return alert('숫자를 입력하세요.');
       try {
-        const res = await fetch('http://localhost:8082/budget', {
+        const config = await getApiConfig();
+        const res = await fetch(`${config.recordServiceUrl}/budget`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -113,8 +125,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 통계 데이터 불러오기
   let stats = [];
   try {
-    console.log('[stats.js] Fetching stats from API:', `http://localhost:8082/stats?month=${monthStr}`);
-    const res = await fetch(`http://localhost:8082/stats?month=${monthStr}`, {
+    const config = await getApiConfig();
+    console.log('[stats.js] Fetching stats from API:', `${config.recordServiceUrl}/stats?month=${monthStr}`);
+    const res = await fetch(`${config.recordServiceUrl}/stats?month=${monthStr}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     console.log('[stats.js] API response status:', res.status);

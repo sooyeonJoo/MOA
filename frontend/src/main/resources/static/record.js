@@ -1,5 +1,15 @@
 console.log('record.js loaded');
 
+// API 설정 가져오기
+let apiConfig = null;
+async function getApiConfig() {
+  if (!apiConfig) {
+    const res = await fetch('/api/config');
+    apiConfig = await res.json();
+  }
+  return apiConfig;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM ready');
 
@@ -87,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!token || !userId) return;
     console.log('budgetAmountEl:', budgetAmountEl);
     try {
-      const res = await fetch(`http://localhost:8082/budget`, {
+      const config = await getApiConfig();
+      const res = await fetch(`${config.recordServiceUrl}/budget`, {
         headers: { 
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -172,7 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const userId = localStorage.getItem('userId');
       if (!v || isNaN(Number(v))) return alert('숫자를 입력하세요.');
       try {
-        const res = await fetch('http://localhost:8082/budget', {
+        const config = await getApiConfig();
+        const res = await fetch(`${config.recordServiceUrl}/budget`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -205,11 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const expenseEl   = document.getElementById('expense');
   const balanceEl   = document.getElementById('balance');
 
-  const API_HOST = 'http://localhost:8082';
-  const GET_URL  = `${API_HOST}/records`;
-  const POST_URL = `${API_HOST}/record`;
-
-  console.log('Config:', { userId, token, GET_URL, POST_URL });
+  console.log('Config:', { userId, token });
 
   // — 예산 초기화 & 헤더 갱신 함수 —
   function updateHeader() {
@@ -224,7 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthParam = `${yyyy}-${mm}-01`;
     console.log('Loading monthly data for', monthParam);
     try {
-      const res = await fetch(`${GET_URL}?month=${monthParam}&userId=${userId}`, {
+      const config = await getApiConfig();
+      const res = await fetch(`${config.recordServiceUrl}/record/records?month=${monthParam}`, {
         headers: { 
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -303,7 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('>>> about to POST recordDTO:', recordDTO);
 
     try {
-      const res = await fetch(POST_URL, {
+      const config = await getApiConfig();
+      const res = await fetch(`${config.recordServiceUrl}/record`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -333,7 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // 1. 현재 월 예산 불러오기
       let budgetAmount = 0;
       try {
-        const budgetRes = await fetch(`http://localhost:8082/budget`, {
+        const budgetConfig = await getApiConfig();
+        const budgetRes = await fetch(`${budgetConfig.recordServiceUrl}/budget`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (budgetRes.ok) {

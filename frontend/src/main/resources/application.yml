@@ -1,0 +1,6 @@
+# 공통 설정 - 모든 환경에서 공통으로 사용되는 설정만
+spring:
+  profiles:
+    active: dev  # 기본 프로파일 설정
+  application:
+    name: frontend 

@@ -24,11 +24,12 @@ WORKDIR /app
 # Copy the built jar from build stage
 COPY --from=build /app/build/libs/*.jar app.jar
 
-# Expose the application port
-EXPOSE 8081
+# Expose the application port (can be overridden by environment variable)
+EXPOSE ${SERVER_PORT:-8080}
 
 # Set environment variables
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
+ENV SPRING_PROFILES_ACTIVE=prod
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"] 

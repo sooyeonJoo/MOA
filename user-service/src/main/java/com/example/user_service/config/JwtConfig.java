@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2024-06
  */
 @Configuration
-@ConfigurationProperties(prefix = "app")
+@ConfigurationProperties(prefix = "jwt")
 @Hidden // Swagger 문서에는 노출하지 않음
 public class JwtConfig {
     /**

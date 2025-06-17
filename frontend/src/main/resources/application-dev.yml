@@ -1,0 +1,27 @@
+# 로컬 개발/레거시 환경 설정
+server:
+  port: 8080  # 서버 포트
+
+# API 통신 설정 (개발 환경)
+api:
+  user-service:
+    url: http://localhost:8081  # 로컬 user-service URL
+  record-service:
+    url: http://localhost:8082  # 로컬 record-service URL
+
+# 정적 리소스 설정
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+      cache-period: 0  # 개발 시 캐시 비활성화
+  
+  # Thymeleaf 설정 (개발용)
+  thymeleaf:
+    cache: false  # 개발 시 템플릿 캐시 비활성화
+    
+# 로깅 설정 (개발 환경)
+logging:
+  level:
+    com.example.frontend: DEBUG
+    org.springframework.web: DEBUG 

@@ -40,8 +40,13 @@ public class StatsServiceImpl implements StatsService {
 
         List<Record> records = recordRepository.findByUserIdAndDateBetween(userId, start, end);
 
-        System.out.println("userId=" + userId + ", start=" + start + ", end=" + end + ", records.size=" + records.size());
-        records.forEach(r -> System.out.println("recId=" + r.getRecId() + ", date=" + r.getDate() + ", type=" + r.getType() + ", category=" + r.getCategory() + ", amount=" + r.getAmount()));
+        log.debug("Stats query - userId: {}, start: {}, end: {}, records count: {}", 
+                  userId, start, end, records.size());
+        
+        if (log.isTraceEnabled()) {
+            records.forEach(r -> log.trace("Record - id: {}, date: {}, type: {}, category: {}, amount: {}", 
+                    r.getRecId(), r.getDate(), r.getType(), r.getCategory(), r.getAmount()));
+        }
 
         int totalIncome = records.stream()
             .filter(r -> r.getType() == Record.RecordType.INCOME)

@@ -18,13 +18,6 @@ import java.util.List;
  * @brief 예산 컨트롤러
  * @details 예산 관련 API 요청을 처리하는 REST 컨트롤러입니다.
  */
-@CrossOrigin(
-    origins = "http://localhost:8080, http://localhost:8081",
-    allowCredentials = "true",
-    allowedHeaders = "*",
-    methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH,
-                RequestMethod.DELETE, RequestMethod.OPTIONS }
-)
 @RestController
 @RequestMapping("/budget")
 @RequiredArgsConstructor

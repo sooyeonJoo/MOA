@@ -27,6 +27,12 @@
   </div>
 
   <script>
+    // API 설정 가져오기
+    async function getApiConfig() {
+      const res = await fetch('/api/config');
+      return await res.json();
+    }
+
     // (옵션) 아이디 중복 체크
     /*const usernameHelp = document.getElementById('usernameHelp');
     document.querySelector('[name="username"]').addEventListener('blur', async (e) => {
@@ -62,7 +68,8 @@
       };
 
       try {
-        const res = await fetch('http://localhost:8081/user', {
+        const config = await getApiConfig();
+        const res = await fetch(`${config.userServiceUrl}/user`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)

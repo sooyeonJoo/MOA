@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
  * @date 2024-06
  */
 
-@CrossOrigin(origins = "http://localhost:8080/*")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")

@@ -1,0 +1,59 @@
+# 로컬 개발/레거시 환경 설정
+server:
+  port: 8081  # 서버 포트
+
+spring:
+  # 데이터베이스 설정 (레거시 환경)
+  datasource:
+    url: jdbc:postgresql://14.63.177.157:30432/sooyeon  # PostgreSQL 데이터베이스 URL
+    driver-class-name: org.postgresql.Driver  # PostgreSQL 드라이버
+    username: sooyeon  # 데이터베이스 사용자 이름
+    password: '1234'  # 데이터베이스 비밀번호
+    # HikariCP 커넥션 풀 설정
+    hikari:
+      maximum-pool-size: 5  # 최대 커넥션 수
+      minimum-idle: 1  # 최소 유휴 커넥션 수
+      idle-timeout: 60000  # 유휴 커넥션 타임아웃 (60초)
+      connection-timeout: 60000  # 커넥션 타임아웃 (60초)
+      max-lifetime: 1800000  # 커넥션 최대 수명 (30분)
+  
+  # JPA 설정 (개발 환경)
+  jpa:
+    hibernate:
+      ddl-auto: validate  # 엔티티와 DB 스키마 검증만 수행 (자동 생성/수정 방지)
+    show-sql: true  # SQL 쿼리 로그 출력 (개발에서만)
+    properties:
+      hibernate:
+        'format_sql': true  # SQL 쿼리 포맷팅 (개발에서만)
+
+# API 통신 설정 (개발 환경)
+api:
+  record-service:
+    url: http://localhost:8082  # 로컬 record-service URL
+  frontend:
+    url: http://localhost:8080  # 로컬 frontend URL
+
+# CORS 설정 (개발 환경)
+cors:
+  allowed-origins:
+    - http://localhost:8080
+    - http://127.0.0.1:8080
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# Swagger UI 설정 (개발 환경)
+springdoc:
+  swagger-ui:
+    path: /swagger-ui  # Swagger UI 경로
+    enabled: true  # Swagger UI 활성화
+    operationsSorter: method  # API 정렬 방식
+    disable-swagger-default-url: true  # 기본 URL 비활성화
+  api-docs:
+    path: /v3/api-docs  # API 문서 경로
+    enabled: true  # API 문서 활성화 

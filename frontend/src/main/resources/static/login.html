@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>로그인 – 모아써</title>
+  <title>로그인-모아써</title>
   <link rel="stylesheet" href="common.css" />
 </head>
 <body>
@@ -22,6 +22,12 @@
   </div>
 
   <script>
+    // API 설정 가져오기
+    async function getApiConfig() {
+      const res = await fetch('/api/config');
+      return await res.json();
+    }
+
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -33,7 +39,8 @@
       };
 
       try {
-        const res = await fetch('http://localhost:8081/user/login', {
+        const config = await getApiConfig();
+        const res = await fetch(`${config.userServiceUrl}/user/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)

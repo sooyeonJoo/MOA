@@ -1,0 +1,68 @@
+# K8s 배포 환경 설정
+server:
+  port: 8080  # K8s 표준 포트
+
+spring:
+  # 데이터베이스 설정 (K8s 환경)
+  datasource:
+    url: jdbc:postgresql://postgres-service:5432/sooyeon  # K8s 내부 서비스명 사용
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:sooyeon}  # 환경변수 또는 기본값
+    password: ${DB_PASSWORD:1234}     # 환경변수 또는 기본값
+    # HikariCP 커넥션 풀 설정 (운영 환경 최적화)
+    hikari:
+      maximum-pool-size: 10  # 운영 환경에서 더 많은 커넥션
+      minimum-idle: 2
+      idle-timeout: 300000   # 5분
+      connection-timeout: 30000  # 30초
+      max-lifetime: 1800000  # 30분
+  
+  # JPA 설정 (운영 환경)
+  jpa:
+    hibernate:
+      ddl-auto: validate  # 운영에서는 validate만
+    show-sql: false  # 운영에서는 SQL 로그 비활성화
+    properties:
+      hibernate:
+        'format_sql': false
+
+# API 통신 설정 (K8s 환경)
+api:
+  record-service:
+    url: http://record-service:8080  # K8s 내부 서비스명
+  frontend:
+    url: http://frontend-service:8080  # K8s 내부 서비스명
+
+# CORS 설정 (K8s 환경 - Kong Gateway 대응)
+cors:
+  allowed-origins:
+    - http://frontend-service:8080
+    - ${FRONTEND_URL:http://localhost:8080}  # 환경변수 또는 기본값
+    - ${KONG_GATEWAY_URL:http://kong-gateway:8000}  # Kong Gateway
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# Swagger UI 설정 (운영 환경 - 비활성화 권장)
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    enabled: false  # 운영에서는 비활성화
+    operationsSorter: method
+    disable-swagger-default-url: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: false  # 운영에서는 비활성화
+
+# 로깅 설정 (운영 환경)
+logging:
+  level:
+    root: INFO
+    com.example.user_service: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n" 

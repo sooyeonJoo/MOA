@@ -1,0 +1,44 @@
+# K8s 배포 환경 설정
+server:
+  port: 8080  # K8s 표준 포트
+
+# API 통신 설정 (K8s 환경 - Kong Gateway 사용)
+api:
+  gateway:
+    # Kong Gateway URL (환경변수로 주입 가능)
+    base-url: ${KONG_GATEWAY_URL:http://kong-gateway:8000}
+    # 라우트 prefix (나중에 Kong 설정에 맞춰 변경)
+    user-service-prefix: ${USER_SERVICE_PREFIX:/user-service}
+    record-service-prefix: ${RECORD_SERVICE_PREFIX:/record-service}
+  
+  # 최종 URL 조합 (base-url + prefix)
+  user-service:
+    url: http://user-service:8080  # K8s 내부 서비스명
+  record-service:
+    url: http://record-service:8080  # K8s 내부 서비스명
+
+# 정적 리소스 설정 (운영 환경)
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+      cache-period: 31536000  # 1년 캐시 (운영 환경)
+  
+  # Thymeleaf 설정 (운영용)
+  thymeleaf:
+    cache: true  # 운영에서는 캐시 활성화
+
+# 로깅 설정 (운영 환경)
+logging:
+  level:
+    root: INFO
+    com.example.frontend: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# 환경변수 지원
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info  # 운영에서는 최소한의 엔드포인트만 노출 
